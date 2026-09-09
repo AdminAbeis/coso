@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questão 15 — Benefícios do ambiente de controle (COSO)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1A2B;
+  --ink-2:#16263D;
+  --slate:#445E80;
+  --paper:#EEF1F4;
+  --paper-dim:#A8B6C6;
+  --stamp:#C24A3E;
+  --seal:#2A7D5F;
+  --rule:rgba(168,182,198,.24);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:"Source Serif 4",Georgia,serif;
+  font-size:17px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+h1,h2,h3,.ui{font-family:Archivo,system-ui,sans-serif}
+
+/* ---------- chrome ---------- */
+.bar{
+  position:fixed;left:0;right:0;top:0;height:52px;z-index:40;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:linear-gradient(180deg,rgba(14,26,43,.97),rgba(14,26,43,.82));
+  border-bottom:1px solid var(--rule);
+}
+.bar .tag{
+  font-family:Archivo;font-weight:700;font-size:12.5px;letter-spacing:.02em;
+  color:var(--paper-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.bar .tag b{color:var(--paper)}
+.spacer{flex:1}
+.clock{
+  font-family:Archivo;font-weight:700;font-size:18px;letter-spacing:.01em;
+  padding:4px 11px;border:1px solid var(--rule);border-radius:3px;
+  color:var(--paper-dim);cursor:pointer;user-select:none;white-space:nowrap;
+}
+.clock.run{color:var(--paper);border-color:var(--slate)}
+.clock.good{color:#7BD3AE;border-color:rgba(42,125,95,.7)}
+.clock.over{color:#F0937F;border-color:rgba(194,74,62,.7)}
+.btn{
+  font-family:Archivo;font-weight:600;font-size:13px;
+  background:none;border:1px solid var(--rule);color:var(--paper-dim);
+  padding:6px 11px;border-radius:3px;cursor:pointer;
+}
+.btn:hover{color:var(--paper);border-color:var(--slate)}
+.btn:focus-visible,.clock:focus-visible{outline:2px solid #7BD3AE;outline-offset:2px}
+
+/* ---------- stage ---------- */
+.stage{position:absolute;inset:52px 0 62px;overflow-y:auto;overflow-x:hidden}
+.slide{display:none;min-height:100%;padding:34px 6vw 40px;max-width:1280px;margin:0 auto}
+.slide.on{display:block}
+.eyebrow{
+  font-family:Archivo;font-weight:700;font-size:12.5px;color:var(--stamp);
+  display:flex;align-items:center;gap:9px;margin-bottom:10px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+h1{font-size:clamp(30px,5vw,54px);line-height:1.04;font-weight:800;letter-spacing:-.022em;margin:0 0 16px}
+h2{font-size:clamp(24px,3.6vw,38px);line-height:1.1;font-weight:700;letter-spacing:-.02em;margin:0 0 18px}
+h3{font-size:19px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}
+p{max-width:66ch;margin:0 0 14px}
+.lead{font-size:clamp(18px,2.1vw,22px);line-height:1.5}
+.dim{color:var(--paper-dim)}
+.src{font-size:14.5px;color:var(--slate);font-style:italic}
+
+/* cover */
+.cover{display:flex;flex-direction:column;justify-content:center;min-height:100%}
+.cover .q{
+  font-family:Archivo;font-weight:800;font-size:13px;color:var(--paper);
+  background:var(--stamp);display:inline-block;padding:5px 10px;border-radius:2px;margin-bottom:18px;
+  align-self:flex-start;
+}
+.roster{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.roster span{
+  font-family:Archivo;font-weight:600;font-size:13.5px;color:var(--paper-dim);
+  border:1px dashed var(--rule);padding:6px 12px;border-radius:3px;
+}
+.roster span:focus{outline:none;color:var(--paper);border-color:var(--seal);border-style:solid}
+
+/* benefit blocks */
+.ben{border-left:3px solid var(--stamp);padding:2px 0 2px 18px;margin:0 0 26px;max-width:74ch}
+.ben .ex{
+  color:var(--paper-dim);font-size:16.5px;margin:8px 0 0;
+  padding-left:16px;border-left:1px solid var(--rule);
+}
+.ben .ex b{color:var(--paper);font-weight:600;font-family:Archivo;font-size:13px;display:block;margin-bottom:2px}
+
+/* principles */
+.princ{list-style:none;padding:0;margin:8px 0 0;max-width:72ch}
+.princ li{padding:9px 0;border-bottom:1px solid var(--rule);font-size:16.5px}
+.princ li:last-child{border-bottom:none}
+
+/* evidence figures */
+.figs{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0 22px}
+.fig{border:1px solid var(--rule);padding:14px 18px;border-radius:3px;min-width:150px}
+.fig .n{font-family:Archivo;font-weight:800;font-size:34px;line-height:1;color:var(--stamp)}
+.fig .l{font-size:14.5px;color:var(--paper-dim);margin-top:6px;max-width:24ch}
+
+/* closing statement */
+.answer{
+  border:1px solid var(--seal);border-left-width:5px;padding:22px 26px;border-radius:3px;
+  max-width:78ch;background:rgba(42,125,95,.07);
+}
+.answer p{font-size:clamp(17px,2vw,21px);margin:0}
+
+/* ---------- mind map ---------- */
+.map-wrap{margin:0 -2vw}
+svg.map{width:100%;height:auto;display:block}
+.mapmob{display:none}
+.mapmob ul{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--stamp)}
+.mapmob li{position:relative;padding:0 0 20px 14px}
+.mapmob li::before{content:"";position:absolute;left:-24px;top:11px;width:22px;height:1px;background:var(--rule)}
+.mapmob .t{font-family:Archivo;font-weight:700;font-size:17px}
+.mapmob .e{color:var(--paper-dim);font-size:15.5px}
+.mapmob .hub{
+  font-family:Archivo;font-weight:800;font-size:17px;border:2px solid var(--stamp);
+  padding:12px 14px;border-radius:3px;margin-bottom:18px;
+}
+.mapmob .hub small{display:block;font-family:"Source Serif 4";font-weight:400;font-size:14px;color:var(--paper-dim);margin-top:4px}
+
+/* ---------- rail ---------- */
+.rail{
+  position:fixed;left:0;right:0;bottom:0;height:62px;z-index:40;
+  display:flex;align-items:stretch;gap:0;padding:0 10px;
+  background:linear-gradient(0deg,rgba(14,26,43,.97),rgba(14,26,43,.82));
+  border-top:1px solid var(--rule);
+}
+.rail button{
+  flex:1;background:none;border:none;border-top:3px solid transparent;color:var(--slate);
+  font-family:Archivo;font-weight:600;font-size:11.5px;cursor:pointer;padding:8px 2px 0;
+  display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;
+}
+.rail button .who{font-size:15px;font-weight:800;color:inherit}
+.rail button .lbl{opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.rail button:hover{color:var(--paper-dim)}
+.rail button[aria-current="true"]{color:var(--paper);border-top-color:var(--stamp)}
+.rail button:focus-visible{outline:2px solid #7BD3AE;outline-offset:-4px}
+
+/* ---------- script overlay ---------- */
+.sheet{
+  position:fixed;inset:0;z-index:60;background:rgba(8,15,26,.96);
+  overflow-y:auto;padding:30px 6vw 70px;display:none;
+}
+.sheet.on{display:block}
+.sheet h2{margin-bottom:6px}
+.turn{border-top:1px solid var(--rule);padding:18px 0;max-width:78ch}
+.turn .head{
+  font-family:Archivo;font-weight:700;font-size:13.5px;color:var(--stamp);
+  display:flex;gap:12px;margin-bottom:8px;
+}
+.turn .head em{color:var(--slate);font-style:normal}
+.turn p{margin:0 0 8px}
+.closebar{position:sticky;top:0;display:flex;justify-content:flex-end;padding-bottom:8px;background:rgba(8,15,26,.96)}
+
+kbd{
+  font-family:Archivo;font-size:11.5px;font-weight:700;border:1px solid var(--rule);
+  padding:1px 5px;border-radius:3px;color:var(--paper-dim);
+}
+.hint{position:fixed;bottom:70px;right:16px;z-index:39;font-size:12.5px;color:var(--slate)}
+
+@media (max-width:820px){
+  body{font-size:16px}
+  .slide{padding:26px 22px 34px}
+  svg.map{display:none}
+  .mapmob{display:block}
+  .rail button .lbl{display:none}
+  .hint{display:none}
+  .bar .tag{font-size:11.5px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="tag"><b>Questão 15</b> · Benefícios do ambiente de controle (COSO) · artigo 4</div>
+  <div class="spacer"></div>
+  <button class="btn" id="scriptBtn">Roteiro</button>
+  <div class="clock ui" id="clock" role="button" tabindex="0" title="Clique para iniciar / pausar">0:00</div>
+</div>
+
+<div class="stage" id="stage">
+
+<!-- 0 -->
+<section class="slide on cover">
+  <span class="q">QUESTÃO 15</span>
+  <h1>Benefícios de um ambiente<br>de controle, segundo o COSO</h1>
+  <p class="lead dim">Gestão de Risco e Compliance · Administração e Ciências Contábeis, 4º período<br>Profª Edileusa Cristina Borçato · 09/09/2026</p>
+  <p class="src">Base: Pereira, A. &amp; Santos, E. F. (2019). As deficiências e as ações de melhoria do controle interno: uma revisão sistemática da literatura. XXVI Congresso Brasileiro de Custos.</p>
+  <div class="roster" id="roster">
+    <span contenteditable="true">Integrante 1</span>
+    <span contenteditable="true">Integrante 2</span>
+    <span contenteditable="true">Integrante 3</span>
+    <span contenteditable="true">Integrante 4</span>
+    <span contenteditable="true">Integrante 5</span>
+    <span contenteditable="true">Integrante 6</span>
+  </div>
+  <p class="src" style="margin-top:14px">Clique nos nomes para editar.</p>
+</section>
+
+<!-- 1 -->
+<section class="slide">
+  <div class="eyebrow">Conceito</div>
+  <h2>O ambiente de controle define o tom da organização</h2>
+  <p class="lead">Segundo o COSO (1992), o ambiente de controle <strong>determina o tom para uma empresa e influencia a consciência de controle</strong> de todos os seus membros. É o clima interno que faz as pessoas levarem o controle a sério — ou tratá-lo como formalidade.</p>
+  <p>Ele é chamado de <strong>base de todos os controles internos</strong>. Os outros quatro componentes do COSO — avaliação de riscos, atividades de controle, informação e comunicação, e monitoramento — se apoiam nele. Sem base, o resto não se sustenta.</p>
+  <p class="src">COSO (1992); Frazer (2016); Moeller (2007), citados no artigo 4.</p>
+</section>
+
+<!-- 2 — mapa mental -->
+<section class="slide">
+  <div class="eyebrow">Mapa mental</div>
+  <h2>Sete coisas que um bom ambiente de controle entrega</h2>
+  <div class="map-wrap">
+  <svg class="map" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa mental dos benefícios do ambiente de controle segundo o COSO">
+    <defs>
+      <style>
+        .cn{fill:none;stroke:#445E80;stroke-width:1.6}
+        .bx{fill:rgba(238,241,244,.045);stroke:#445E80;stroke-width:1.2;rx:4}
+        .tt{font-family:Archivo,sans-serif;font-weight:700;font-size:21px;fill:#EEF1F4}
+        .ee{font-family:"Source Serif 4",serif;font-size:14.5px;fill:#A8B6C6}
+        .hub{font-family:Archivo,sans-serif;font-weight:800;font-size:25px;fill:#EEF1F4}
+        .hubsub{font-family:"Source Serif 4",serif;font-size:15px;fill:#A8B6C6;font-style:italic}
+      </style>
+    </defs>
+
+    <!-- connectors -->
+    <path class="cn" d="M450 350 C 380 350 370 130 320 130"/>
+    <path class="cn" d="M450 350 C 400 350 380 350 320 350"/>
+    <path class="cn" d="M450 350 C 380 350 370 570 320 570"/>
+    <path class="cn" d="M750 350 C 820 350 830 95 880 95"/>
+    <path class="cn" d="M750 350 C 820 350 830 265 880 265"/>
+    <path class="cn" d="M750 350 C 820 350 830 435 880 435"/>
+    <path class="cn" d="M750 350 C 820 350 830 605 880 605"/>
+
+    <!-- hub -->
+    <rect x="452" y="286" width="296" height="128" rx="4" fill="rgba(194,74,62,.10)" stroke="#C24A3E" stroke-width="2.5"/>
+    <rect x="461" y="295" width="278" height="110" rx="2" fill="none" stroke="#C24A3E" stroke-width="1" opacity=".55"/>
+    <text class="hub" x="600" y="336" text-anchor="middle">AMBIENTE DE</text>
+    <text class="hub" x="600" y="364" text-anchor="middle">CONTROLE</text>
+    <text class="hubsub" x="600" y="390" text-anchor="middle">define o tom · base dos 5 componentes</text>
+
+    <!-- left nodes -->
+    <rect class="bx" x="20" y="89" width="300" height="82"/>
+    <text class="tt" x="40" y="118">Disciplina</text>
+    <text class="ee" x="40" y="140">A regra vale para todos, sem</text>
+    <text class="ee" x="40" y="159">exceção de última hora.</text>
+
+    <rect class="bx" x="20" y="309" width="300" height="82"/>
+    <text class="tt" x="40" y="338">Estrutura</text>
+    <text class="ee" x="40" y="360">Quem aprova, quem registra e quem</text>
+    <text class="ee" x="40" y="379">guarda o ativo são pessoas diferentes.</text>
+
+    <rect class="bx" x="20" y="529" width="300" height="82"/>
+    <text class="tt" x="40" y="558">Integridade</text>
+    <text class="ee" x="40" y="580">Código de conduta e canal de denúncia</text>
+    <text class="ee" x="40" y="599">que a própria direção respeita.</text>
+
+    <!-- right nodes -->
+    <rect class="bx" x="880" y="54" width="300" height="82"/>
+    <text class="tt" x="900" y="83">Valores éticos</text>
+    <text class="ee" x="900" y="105">Recusar vantagem de fornecedor</text>
+    <text class="ee" x="900" y="124">mesmo sem ninguém olhando.</text>
+
+    <rect class="bx" x="880" y="224" width="300" height="82"/>
+    <text class="tt" x="900" y="253">Competência operacional</text>
+    <text class="ee" x="900" y="275">Contratar e treinar quem entende</text>
+    <text class="ee" x="900" y="294">do controle que vai executar.</text>
+
+    <rect class="bx" x="880" y="394" width="300" height="82"/>
+    <text class="tt" x="900" y="423">Filosofia de gestão</text>
+    <text class="ee" x="900" y="445">Controlar para prevenir, não só</text>
+    <text class="ee" x="900" y="464">depois que a perda aparece.</text>
+
+    <rect class="bx" x="880" y="564" width="300" height="82"/>
+    <text class="tt" x="900" y="593">Estilo de gestão e liderança</text>
+    <text class="ee" x="900" y="615">O chefe confere antes de assinar —</text>
+    <text class="ee" x="900" y="634">e o time passa a conferir também.</text>
+  </svg>
+  </div>
+
+  <div class="mapmob">
+    <div class="hub">AMBIENTE DE CONTROLE<small>define o tom · base dos 5 componentes</small></div>
+    <ul>
+      <li><span class="t">Disciplina</span><br><span class="e">A regra vale para todos, sem exceção de última hora.</span></li>
+      <li><span class="t">Estrutura</span><br><span class="e">Quem aprova, quem registra e quem guarda o ativo são pessoas diferentes.</span></li>
+      <li><span class="t">Integridade</span><br><span class="e">Código de conduta e canal de denúncia que a própria direção respeita.</span></li>
+      <li><span class="t">Valores éticos</span><br><span class="e">Recusar vantagem de fornecedor mesmo sem ninguém olhando.</span></li>
+      <li><span class="t">Competência operacional</span><br><span class="e">Contratar e treinar quem entende do controle que vai executar.</span></li>
+      <li><span class="t">Filosofia de gestão</span><br><span class="e">Controlar para prevenir, não só depois que a perda aparece.</span></li>
+      <li><span class="t">Estilo de gestão e liderança</span><br><span class="e">O chefe confere antes de assinar — e o time passa a conferir também.</span></li>
+    </ul>
+  </div>
+
+  <p class="src" style="margin-top:18px">Os sete itens vêm de Frazer (2016), citado no artigo 4: o ambiente de controle “fornece disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e o estilo operacional da administração e a liderança fornecida pela administração”.</p>
+
+  <h3 style="margin-top:26px">No COSO, isso vira cinco princípios</h3>
+  <ol class="princ">
+    <li>A organização demonstra compromisso com a integridade e os valores éticos.</li>
+    <li>Supervisão para o desenvolvimento e o desempenho do controle interno.</li>
+    <li>Estabelecimento de estruturas, relatórios, autoridades e responsabilidades.</li>
+    <li>Compromisso de atrair, desenvolver e reter pessoas competentes.</li>
+    <li>Responsabilização das pessoas por suas funções de controle interno.</li>
+  </ol>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <div class="eyebrow">Benefícios 1 a 3</div>
+  <h2>Disciplina, estrutura e integridade</h2>
+
+  <div class="ben">
+    <h3>Disciplina</h3>
+    <p class="dim">O procedimento vale igual para todo mundo, todo dia.</p>
+    <p class="ex"><b>Exemplo</b>Só se paga um fornecedor com nota fiscal e pedido aprovado — não existe “libera essa aqui que é urgente”. O artigo mostra o oposto disso: empresas em que o controle era informal e ficava restrito ao gerente.</p>
+  </div>
+
+  <div class="ben">
+    <h3>Estrutura</h3>
+    <p class="dim">Cada pessoa sabe o que aprova, o que registra e o que guarda.</p>
+    <p class="ex"><b>Exemplo</b>Segregação de funções: autorizar a compra, registrar o lançamento e ter a custódia do bem devem estar em três pessoas diferentes (Sancovschi, 1999).</p>
+  </div>
+
+  <div class="ben">
+    <h3>Integridade</h3>
+    <p class="dim">Existe uma linha clara do que é aceitável — e ela é cobrada.</p>
+    <p class="ex"><b>Exemplo</b>Código de conduta assinado e canal de denúncias que a direção realmente usa. Isso reduz o espaço para erro e para fraude.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <div class="eyebrow">Benefícios 4 e 5</div>
+  <h2>Valores éticos e competência operacional</h2>
+
+  <div class="ben">
+    <h3>Valores éticos</h3>
+    <p class="dim">O que a organização faz quando ninguém está vendo.</p>
+    <p class="ex"><b>Exemplo</b>O gerente recusa um presente ou uma vantagem oferecida por fornecedor em processo de compra. Se a chefia aceita, todo o resto do controle vira encenação.</p>
+  </div>
+
+  <div class="ben">
+    <h3>Competência operacional</h3>
+    <p class="dim">Gente preparada para executar o controle que está no papel.</p>
+    <p class="ex"><b>Exemplo</b>O artigo relata escritórios em que os profissionais de contabilidade não tinham conhecimento sobre o controle interno das empresas pelas quais eram responsáveis. O controle existia formalmente e não funcionava.</p>
+  </div>
+
+  <p class="src">Princípio 4 do COSO: compromisso de atrair, desenvolver e reter pessoas competentes.</p>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <div class="eyebrow">Benefícios 6 e 7</div>
+  <h2>Filosofia de gestão e estilo de liderança</h2>
+
+  <div class="ben">
+    <h3>Filosofia de gestão</h3>
+    <p class="dim">Controlar para prevenir, não para remediar.</p>
+    <p class="ex"><b>Exemplo</b>O artigo mostra empresas que só adotavam controles de proteção de ativos depois de um desempenho ruim. Nuintin, Curi e Gallon (2010) defendem o contrário: o controle interno precisa ter caráter preventivo, voltado a corrigir desvios antes que virem perda.</p>
+  </div>
+
+  <div class="ben">
+    <h3>Estilo de operação e liderança</h3>
+    <p class="dim">O comportamento da alta administração é copiado por todo mundo.</p>
+    <p class="ex"><b>Exemplo</b>Se o diretor assina sem conferir, a equipe aprende que conferir é perda de tempo. Se ele confere, o time confere. É o que o COSO chama de “tom no topo”.</p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <div class="eyebrow">Prova pelo avesso</div>
+  <h2>O que acontece quando o ambiente de controle falha</h2>
+  <p class="lead">O artigo 4 revisou 27 publicações do Congresso Brasileiro de Custos e agrupou as falhas de controle interno em 11 categorias.</p>
+  <div class="figs">
+    <div class="fig"><div class="n">27</div><div class="l">publicações analisadas na revisão sistemática</div></div>
+    <div class="fig"><div class="n">11</div><div class="l">agrupamentos de deficiências de controle interno</div></div>
+    <div class="fig"><div class="n">1º</div><div class="l">ambiente de controle e comunicação: as dimensões com mais deficiências relatadas</div></div>
+  </div>
+  <p>Os autores concluem que as deficiências <strong>parecem estar associadas à não observância dos princípios do COSO</strong>, e que ignorar esses princípios eleva a existência de erros e fraudes.</p>
+  <p>E a melhoria proposta é, de novo, ambiente de controle: <strong>treinar pessoal para disseminar uma cultura de controle, transparência e responsabilidade</strong>, sensibilizar a equipe e estabelecer responsabilidades claras.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <div class="eyebrow">Resposta</div>
+  <h2>Em uma frase</h2>
+  <div class="answer">
+    <p>O ambiente de controle é a base do modelo COSO: ao definir o tom da organização, ele entrega <strong>disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e um estilo de liderança</strong> — os benefícios que fazem os outros quatro componentes do controle interno realmente funcionarem.</p>
+  </div>
+  <p class="src" style="margin-top:22px">PEREIRA, A.; SANTOS, E. F. dos. As deficiências e as ações de melhoria do controle interno: uma revisão sistemática da literatura. Congresso Brasileiro de Custos, Curitiba, 9 a 11 out. 2019.</p>
+  <p class="dim" style="margin-top:18px">Obrigado. Perguntas?</p>
+</section>
+
+</div>
+
+<div class="hint ui">Setas <kbd>←</kbd> <kbd>→</kbd> para navegar · <kbd>R</kbd> roteiro · <kbd>T</kbd> cronômetro</div>
+
+<nav class="rail" id="rail" aria-label="Navegação da apresentação"></nav>
+
+<div class="sheet" id="sheet">
+  <div class="closebar"><button class="btn" id="closeSheet">Fechar roteiro</button></div>
+  <h2>Roteiro falado — 6 min</h2>
+  <p class="dim">Cada integrante fala uma vez. Os tempos são alvo, não regra: se um passar, o próximo enxuga.</p>
+
+  <div class="turn">
+    <div class="head">Integrante 1 <em>0:00 – 1:00 · slides Capa e Conceito</em></div>
+    <p>Boa noite. Nosso grupo respondeu a questão 15: quais são os benefícios de um ambiente de controle segundo o COSO. A resposta está no artigo 4, sobre as deficiências e as ações de melhoria do controle interno.</p>
+    <p>Começando pelo conceito: segundo o COSO, de 1992, o ambiente de controle determina o tom da empresa e influencia a consciência de controle de todos os seus membros. Em outras palavras, é o clima interno que faz as pessoas levarem o controle a sério — ou tratarem como formalidade. E ele é chamado de base de todos os controles internos.</p>
+  </div>
+
+  <div class="turn">
+    <div class="head">Integrante 2 <em>1:00 – 2:05 · slide Mapa mental</em></div>
+    <p>Por que ele é a base? Porque os outros quatro componentes do COSO — avaliação de riscos, atividades de controle, informação e comunicação, e monitoramento — se apoiam nele. Se a base não existe, o resto não se sustenta.</p>
+    <p>Este é o nosso mapa mental. O artigo, citando Frazer, lista sete coisas que um bom ambiente de controle fornece à organização: disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e o estilo de operação e a liderança da administração. E no COSO isso se traduz em cinco princípios: integridade e valores éticos, supervisão, estruturas e responsabilidades definidas, pessoas competentes e responsabilização. Vamos passar pelos sete com exemplos.</p>
+  </div>
+
+  <div class="turn">
+    <div class="head">Integrante 3 <em>2:05 – 3:10 · slide Benefícios 1 a 3</em></div>
+    <p><strong>Disciplina:</strong> o procedimento vale igual para todos. Exemplo: só se paga fornecedor com nota fiscal e pedido aprovado, não existe “libera essa que é urgente”. O artigo mostra justamente o contrário em algumas empresas, onde o controle era informal e ficava restrito ao gerente.</p>
+    <p><strong>Estrutura:</strong> cada um sabe o que aprova, o que registra e o que guarda. É a segregação de funções — autorizar, registrar e ter a custódia do ativo em três pessoas diferentes.</p>
+    <p><strong>Integridade:</strong> código de conduta e canal de denúncias que a própria direção respeita. Isso reduz o espaço para erro e para fraude.</p>
+  </div>
+
+  <div class="turn">
+    <div class="head">Integrante 4 <em>3:10 – 4:10 · slide Benefícios 4 e 5</em></div>
+    <p><strong>Valores éticos:</strong> é o que a empresa faz quando ninguém está olhando. Exemplo: o gerente recusa uma vantagem oferecida por um fornecedor em processo de compra. Se a chefia aceita, todo o resto do controle vira encenação.</p>
+    <p><strong>Competência operacional:</strong> ter gente preparada para executar o controle que está no papel. O artigo traz um exemplo forte: profissionais de contabilidade que não tinham conhecimento sobre o controle interno das empresas pelas quais eram responsáveis. O controle existia formalmente e não funcionava. Por isso o COSO tem um princípio só para atrair, desenvolver e reter pessoas competentes.</p>
+  </div>
+
+  <div class="turn">
+    <div class="head">Integrante 5 <em>4:10 – 5:05 · slide Benefícios 6 e 7</em></div>
+    <p><strong>Filosofia de gestão:</strong> controlar para prevenir, não para remediar. O artigo mostra empresas que só adotavam controles de proteção de ativos depois de um desempenho ruim; e os autores defendem o contrário, que o controle precisa ter caráter preventivo, voltado a corrigir desvios antes que virem perda.</p>
+    <p><strong>Estilo de operação e liderança:</strong> o comportamento da alta administração é copiado. Se o diretor assina sem conferir, a equipe aprende que conferir é perda de tempo. Se ele confere, o time confere. É o que se chama de tom no topo.</p>
+  </div>
+
+  <div class="turn">
+    <div class="head">Integrante 6 <em>5:05 – 6:05 · slides Prova pelo avesso e Resposta</em></div>
+    <p>Para fechar, o próprio artigo mostra o que acontece quando isso falha. Foram 27 publicações analisadas e 11 grupos de deficiências de controle interno. E o ambiente de controle e a comunicação foram exatamente as dimensões com mais deficiências relatadas. Os autores concluem que essas falhas estão associadas à não observância dos princípios do COSO, o que eleva a existência de erros e fraudes.</p>
+    <p>E a ação de melhoria que eles apontam é ambiente de controle de novo: treinar pessoal para disseminar uma cultura de controle, transparência e responsabilidade, e definir responsabilidades.</p>
+    <p>Resumindo a resposta da questão 15: o benefício de um ambiente de controle é entregar disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e liderança — a base sem a qual nenhum outro controle interno funciona. Obrigado.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var rail = document.getElementById('rail');
+  var stage = document.getElementById('stage');
+  var meta = [
+    {who:'1', lbl:'Capa'},
+    {who:'1', lbl:'Conceito'},
+    {who:'2', lbl:'Mapa mental'},
+    {who:'3', lbl:'Benef. 1–3'},
+    {who:'4', lbl:'Benef. 4–5'},
+    {who:'5', lbl:'Benef. 6–7'},
+    {who:'6', lbl:'Sem ambiente'},
+    {who:'6', lbl:'Resposta'}
+  ];
+  var i = 0;
+
+  meta.forEach(function(m, idx){
+    var b = document.createElement('button');
+    b.innerHTML = '<span class="who">'+m.who+'</span><span class="lbl">'+m.lbl+'</span>';
+    b.title = 'Integrante '+m.who+' — '+m.lbl;
+    b.addEventListener('click', function(){ go(idx); });
+    rail.appendChild(b);
+  });
+  var tabs = Array.prototype.slice.call(rail.children);
+
+  function go(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach(function(s,k){ s.classList.toggle('on', k===i); });
+    tabs.forEach(function(t,k){ t.setAttribute('aria-current', k===i ? 'true':'false'); });
+    stage.scrollTop = 0;
+  }
+
+  // clock
+  var clock = document.getElementById('clock'), t0 = null, acc = 0, running = false;
+  function fmt(ms){
+    var s = Math.floor(ms/1000);
+    return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);
+  }
+  function tick(){
+    var ms = acc + (running ? Date.now()-t0 : 0);
+    clock.textContent = fmt(ms);
+    clock.classList.toggle('run', running && ms < 300000);
+    clock.classList.toggle('good', ms >= 300000 && ms <= 420000);
+    clock.classList.toggle('over', ms > 420000);
+  }
+  function toggleClock(){
+    if(running){ acc += Date.now()-t0; running = false; }
+    else { t0 = Date.now(); running = true; }
+    tick();
+  }
+  clock.addEventListener('click', toggleClock);
+  clock.addEventListener('keydown', function(e){
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleClock(); }
+  });
+  setInterval(tick, 250);
+
+  // script sheet
+  var sheet = document.getElementById('sheet');
+  function toggleSheet(force){
+    sheet.classList.toggle('on', force === undefined ? !sheet.classList.contains('on') : force);
+  }
+  document.getElementById('scriptBtn').addEventListener('click', function(){ toggleSheet(); });
+  document.getElementById('closeSheet').addEventListener('click', function(){ toggleSheet(false); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.target.isContentEditable) return;
+    if(e.key==='Escape'){ toggleSheet(false); return; }
+    if(sheet.classList.contains('on')) return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); go(i+1); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(i-1); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(slides.length-1); }
+    else if(e.key==='r'||e.key==='R'){ toggleSheet(true); }
+    else if(e.key==='t'||e.key==='T'){ toggleClock(); }
+  });
+
+  // swipe on touch
+  var x0=null;
+  stage.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    if(x0===null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 60){ go(dx < 0 ? i+1 : i-1); }
+    x0 = null;
+  }, {passive:true});
+
+  go(0);
+})();
+</script>
+</body>
+</html>
