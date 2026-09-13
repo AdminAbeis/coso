@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Material de estudo — Questão 15 (COSO)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1A2B;--ink-2:#16263D;--slate:#445E80;--paper:#EEF1F4;--paper-dim:#A8B6C6;
+  --stamp:#C24A3E;--seal:#2A7D5F;--rule:rgba(168,182,198,.24);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:"Source Serif 4",Georgia,serif;font-size:18px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.ui,th,.bar,.tabs,kbd{font-family:Archivo,system-ui,sans-serif}
+
+.bar{
+  position:sticky;top:0;z-index:20;background:rgba(14,26,43,.97);
+  border-bottom:1px solid var(--rule);backdrop-filter:blur(8px);
+}
+.barin{max-width:760px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:12px}
+.barin .t{font-weight:700;font-size:13px;color:var(--paper-dim)}
+.barin .t b{color:var(--paper)}
+.barin .sp{flex:1}
+.back{
+  font-family:Archivo;font-weight:600;font-size:12.5px;color:var(--paper-dim);
+  text-decoration:none;border:1px solid var(--rule);padding:5px 10px;border-radius:3px;white-space:nowrap;
+}
+.back:hover{color:var(--paper);border-color:var(--slate)}
+
+.tabs{
+  position:sticky;top:47px;z-index:19;background:rgba(14,26,43,.97);
+  border-bottom:1px solid var(--rule);backdrop-filter:blur(8px);
+}
+.tabsin{max-width:760px;margin:0 auto;padding:0 22px;display:flex;gap:0}
+.tabsin button{
+  background:none;border:none;border-bottom:2px solid transparent;color:var(--slate);
+  font-family:Archivo;font-weight:700;font-size:14px;padding:12px 0;margin-right:26px;cursor:pointer;
+}
+.tabsin button[aria-selected="true"]{color:var(--paper);border-bottom-color:var(--stamp)}
+.tabsin button:hover{color:var(--paper-dim)}
+
+main{max-width:760px;margin:0 auto;padding:12px 22px 90px}
+.doc{display:none}
+.doc.on{display:block}
+.doc>h2:first-child,.doc>h3:first-child{margin-top:18px}
+
+h2{
+  font-size:26px;font-weight:800;line-height:1.15;letter-spacing:-.02em;
+  margin:46px 0 14px;padding-top:4px;
+}
+h3{font-size:19px;font-weight:700;margin:30px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 16px}
+strong{font-weight:600;color:#fff}
+em{color:var(--paper-dim)}
+hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
+ul,ol{margin:0 0 18px;padding-left:22px}
+li{margin-bottom:9px}
+li::marker{color:var(--slate)}
+
+blockquote{
+  margin:22px 0;padding:20px 24px;border:1px solid var(--seal);border-left-width:5px;
+  border-radius:3px;background:rgba(42,125,95,.08);
+}
+blockquote p{margin:0;font-size:19px}
+
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:16px}
+th{
+  text-align:left;font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  color:var(--stamp);border-bottom:1px solid var(--rule);padding:8px 10px 8px 0;
+}
+td{padding:10px 10px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:none}
+
+code{font-size:.92em;background:rgba(168,182,198,.12);padding:1px 5px;border-radius:3px}
+
+.note{
+  font-size:15px;color:var(--slate);border-top:1px solid var(--rule);
+  margin-top:60px;padding-top:18px;
+}
+.totop{
+  position:fixed;right:16px;bottom:16px;z-index:21;
+  font-family:Archivo;font-weight:600;font-size:12.5px;
+  background:var(--ink-2);color:var(--paper-dim);border:1px solid var(--rule);
+  padding:9px 13px;border-radius:3px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{color:var(--paper)}
+
+@media (max-width:700px){
+  body{font-size:17px}
+  h2{font-size:22px;margin-top:38px}
+  h3{font-size:18px}
+  .barin,.tabsin,main{padding-left:18px;padding-right:18px}
+  table{font-size:15px}
+}
+@media print{
+  .bar,.tabs,.totop{display:none}
+  body{background:#fff;color:#000}
+  .doc{display:block!important}
+  strong{color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="barin">
+    <div class="t"><b>Material de estudo</b> · Questão 15 · COSO</div>
+    <div class="sp"></div>
+    <a class="back" href="../index.html">Apresentação</a>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tabsin" role="tablist">
+    <button id="t-resumo" role="tab" aria-selected="true" aria-controls="d-resumo">Resumo</button>
+    <button id="t-guia" role="tab" aria-selected="false" aria-controls="d-guia">Guia de estudo</button>
+  </div>
+</div>
+
+<main>
+  <section class="doc on" id="d-resumo" role="tabpanel" aria-labelledby="t-resumo">
+    <h1 style="font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.022em;margin:26px 0 8px">O artigo 4 explicado do zero</h1>
+    <p style="color:var(--paper-dim);margin-bottom:6px">Tudo o que você precisa para responder “quais são os benefícios de um ambiente de controle, segundo o COSO”.</p>
+    <p style="color:var(--slate);font-size:15px"><em>Leitura de uns 7 minutos. Se você ler só isto, já consegue apresentar e responder perguntas.</em></p>
+    <hr>
+<h2>Por que esse assunto existe</h2>
+<p>Toda empresa perde dinheiro por caminhos que ninguém planejou: material que some do estoque, retrabalho, nota lançada errada, pagamento feito duas vezes, fornecedor que superfatura. Isso não acontece porque as pessoas são desonestas, na maioria das vezes. Acontece porque ninguém combinou quem confere o quê.</p>
+<p>Controle interno é exatamente isso: o conjunto de combinados que a organização cria para proteger seus recursos contra perdas, fraudes e ineficiências, e para conseguir chegar nos objetivos dela. Nada mais místico do que isso.</p>
+<p>Um detalhe importante, que costuma cair em prova: controle interno dá uma <strong>garantia razoável, não absoluta</strong>. Ele reduz muito a chance de dar errado; não elimina. Quem promete que o controle acaba com a fraude está exagerando.</p>
+<hr />
+<h2>O que é o COSO</h2>
+<p>Nos anos 80 e 90 estourou uma sequência de escândalos contábeis e fraudes nos Estados Unidos. A pergunta que ficou foi: como as empresas deveriam organizar seus controles para que isso não se repetisse?</p>
+<p>Em 1992, um comitê chamado <strong>COSO</strong> — <em>Committee of Sponsoring Organizations of the Treadway Commission</em> — publicou uma resposta: uma estrutura conceitual de controle interno. Virou a referência mundial. Depois foi atualizada e hoje trabalha com 17 princípios.</p>
+<p>Pense no COSO como um manual com três camadas. Vale gravar essas três, porque quase toda pergunta sobre o tema cai em alguma delas.</p>
+<p><strong>Primeira camada — os 3 objetivos.</strong> É <em>o que</em> a organização quer alcançar com o controle:</p>
+<ul>
+<li><strong>Operações</strong>: fazer as coisas com eficácia e eficiência, bater metas e proteger os ativos contra desperdício.</li>
+<li><strong>Relatórios</strong>: ter demonstrações e informações confiáveis, para dentro e para fora da empresa.</li>
+<li><strong>Conformidade</strong>: cumprir as leis, normas e regulamentos que se aplicam à organização.</li>
+</ul>
+<p><strong>Segunda camada — os 5 componentes.</strong> É <em>como</em> se chega lá. São cinco blocos: ambiente de controle, avaliação de riscos, atividades de controle, informação e comunicação, e monitoramento.</p>
+<p><strong>Terceira camada — os 17 princípios.</strong> São as regras práticas, distribuídas entre os cinco componentes. Cinco delas pertencem ao ambiente de controle, que é o nosso tema.</p>
+<hr />
+<h2>O ambiente de controle: o nosso tema</h2>
+<p>Dos cinco componentes, o primeiro é o <strong>ambiente de controle</strong>. E ele tem um status diferente dos outros quatro: ele é a <strong>base</strong>. Os outros quatro se apoiam nele.</p>
+<p>A definição do COSO, que está no artigo, é esta: o ambiente de controle <strong>determina o "tom" da empresa e influencia a consciência de controle de todos os seus membros</strong>.</p>
+<p>"Tom" aqui é o que a gente chamaria de clima, ou de cultura. É a resposta silenciosa que todo funcionário sabe dar para a pergunta: <em>aqui dentro, seguir o procedimento importa de verdade, ou é só teatro?</em></p>
+<p>Se a resposta é "importa", o controle funciona. Se a resposta é "é teatro", você pode escrever o manual de procedimentos mais bem feito do mundo: ninguém vai seguir. É por isso que o ambiente de controle é a base. Ele não é um controle específico; ele é a condição para que todos os outros funcionem.</p>
+<p>Uma imagem que ajuda: os outros quatro componentes são a construção; o ambiente de controle é o terreno. Terreno ruim derruba prédio bom.</p>
+<hr />
+<h2>A resposta da questão 15</h2>
+<p>Agora a parte que importa. O artigo, citando um autor chamado Frazer (2016), diz o seguinte: o ambiente de controle é a base para todos os controles internos <strong>porque fornece</strong> à empresa sete coisas.</p>
+<p>Essas sete coisas <strong>são</strong> os benefícios que a questão pede:</p>
+<p><strong>1. Disciplina.</strong> O procedimento vale igual para todo mundo, todo dia. Na prática: só se paga um fornecedor com nota fiscal e pedido aprovado. Não existe "libera essa aqui que é urgente". O artigo encontrou justamente o contrário em várias empresas: controles informais que ficavam só na cabeça do gerente.</p>
+<p><strong>2. Estrutura.</strong> Cada pessoa sabe o que aprova, o que registra e o que guarda. O nome técnico é segregação de funções: autorizar a compra, registrar o lançamento e ter a guarda do bem precisam estar em três pessoas diferentes. Se as três coisas estão na mesma mão, a pessoa pode comprar de si mesma e apagar o rastro.</p>
+<p><strong>3. Integridade.</strong> Existe uma linha clara do que é aceitável, e ela é cobrada. Código de conduta, canal de denúncia, consequência para quem passa da linha.</p>
+<p><strong>4. Valores éticos.</strong> O que a organização faz quando ninguém está olhando. O gerente que recusa um presente do fornecedor no meio de uma licitação está sustentando o ambiente de controle sozinho naquele momento. O que aceita destrói o efeito de todo o resto.</p>
+<p><strong>5. Competência operacional.</strong> Ter gente preparada para executar o controle que está escrito. O artigo traz um exemplo forte disso ao contrário: profissionais de contabilidade que não tinham conhecimento sobre o controle interno das empresas pelas quais eram responsáveis. O controle existia no papel e não funcionava.</p>
+<p><strong>6. Filosofia de gestão.</strong> A empresa controla para prevenir, não para remediar. O artigo encontrou empresas que só adotavam controles de proteção de ativos depois de um resultado ruim — ou seja, controle como remédio, depois do prejuízo. Os autores defendem o contrário: controle interno tem que ter caráter preventivo.</p>
+<p><strong>7. Estilo operacional e liderança da administração.</strong> O comportamento de quem manda é copiado por todos. Se o diretor assina sem conferir, a equipe aprende que conferir é perda de tempo. Se ele confere, o time confere. É o que se chama de "tom no topo".</p>
+<p>Pronto. <strong>Disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e estilo de liderança.</strong> Se alguém perguntar a resposta da questão 15, é essa lista.</p>
+<hr />
+<h2>Os cinco princípios do ambiente de controle</h2>
+<p>O COSO pega esses benefícios e transforma em cinco regras práticas. São os princípios 1 a 5 dos 17:</p>
+<ol>
+<li>A organização demonstra compromisso com a integridade e os valores éticos.</li>
+<li>Há supervisão para o desenvolvimento e o desempenho do controle interno.</li>
+<li>Ficam estabelecidas as estruturas, os relatórios, as autoridades e as responsabilidades.</li>
+<li>Há compromisso de atrair, desenvolver e reter pessoas competentes.</li>
+<li>As pessoas assumem responsabilidade por suas funções de controle interno.</li>
+</ol>
+<p>Repare que os cinco princípios são praticamente os sete benefícios ditos em linguagem de norma. Integridade e valores éticos viram o princípio 1; estrutura vira o 3; competência vira o 4; disciplina e responsabilização viram o 5; e a liderança aparece no 2.</p>
+<hr />
+<h2>O que o artigo 4 fez, e por que isso fortalece a resposta</h2>
+<p>O artigo não é um texto de opinião. É uma <strong>revisão sistemática da literatura</strong>: os autores definiram uma pergunta de pesquisa — quais são as evidências sobre deficiências e contribuições do controle interno — e foram atrás de tudo o que já tinha sido publicado sobre isso no Congresso Brasileiro de Custos. Acabaram com <strong>27 publicações</strong> analisadas.</p>
+<p>Eles pegaram todas as falhas relatadas nesses 27 trabalhos e organizaram em <strong>11 categorias</strong>: falhas em ferramentas de custos, em comunicação interna, na estrutura dos controles, em gestão de custos, em estoques, em gestão de riscos, em escritórios de contabilidade, em prestação de contas, em proteção de ativos, no BSC e em transações de alto nível.</p>
+<p>Aí vêm as duas conclusões que interessam para nós.</p>
+<p><strong>Primeira:</strong> as deficiências, na maioria, parecem estar associadas à <strong>não observância dos princípios do COSO</strong>. E ignorar esses princípios pode elevar a existência de erros e fraudes.</p>
+<p><strong>Segunda, e é a melhor:</strong> considerando o COSO, o <strong>ambiente de controle e a comunicação são as dimensões que mais carecem de atenção</strong> — foram as que concentraram mais evidências de falha.</p>
+<p>Isso é a nossa resposta provada pelo avesso. A gente diz que o ambiente de controle traz sete benefícios; o artigo mostra que é justamente onde as empresas mais falham, e que falhar ali aumenta erro e fraude.</p>
+<p>E quando os autores listam o que fazer para melhorar, a receita é de novo ambiente de controle: <strong>treinar o pessoal para disseminar uma cultura de controle, transparência e responsabilidade</strong>, sensibilizar a equipe e estabelecer responsabilidades claras.</p>
+<hr />
+<h2>Como explicar em trinta segundos</h2>
+<p>Se alguém do grupo travar, esta é a saída:</p>
+<blockquote>
+<p>O ambiente de controle é o "tom" da organização — o clima que faz as pessoas levarem o controle a sério. Segundo o COSO, ele é a base de todo o controle interno, porque fornece disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e o estilo de liderança da administração. São esses os benefícios. E o artigo mostra que, quando essa base falta, aumentam os erros e as fraudes — porque sem ela nenhum outro controle funciona.</p>
+</blockquote>
+<hr />
+<h2>Cinco coisas que não podem sair erradas</h2>
+<ul>
+<li>São <strong>3 objetivos, 5 componentes, 17 princípios</strong> — e <strong>5 princípios</strong> dentro do ambiente de controle.</li>
+<li>O artigo analisou <strong>27 publicações</strong> e achou <strong>11 categorias</strong> de deficiência.</li>
+<li>COSO foi criado em <strong>1992</strong>.</li>
+<li>Controle interno dá garantia <strong>razoável, não absoluta</strong>.</li>
+<li>Ambiente de controle <strong>não</strong> é clima organizacional de RH. Não é sobre as pessoas estarem felizes; é sobre ética, estrutura, competência, disciplina e responsabilização.</li>
+</ul>
+    <p class="note">Fonte: PEREIRA, A.; SANTOS, E. F. dos. As deficiências e as ações de melhoria do controle interno: uma revisão sistemática da literatura. XXVI Congresso Brasileiro de Custos, Curitiba, 2019.</p>
+  </section>
+
+  <section class="doc" id="d-guia" role="tabpanel" aria-labelledby="t-guia">
+    <h1 style="font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.022em;margin:26px 0 8px">Guia de estudo</h1>
+    <p style="color:var(--paper-dim);margin-bottom:6px">Material de consulta: conceitos, dados do artigo e banco de perguntas prováveis.</p>
+    <p style="color:var(--slate);font-size:15px"><em>Para abrir na hora da dúvida, não para ler de ponta a ponta.</em></p>
+    <hr>
+<h2>1. A resposta curta — decore esta parte</h2>
+<blockquote>
+<p>Segundo o COSO, o ambiente de controle <strong>determina o "tom" da empresa e influencia a consciência de controle de todos os seus membros</strong>. Ele é a <strong>base para todos os controles internos</strong>, porque fornece à organização: <strong>disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e o estilo operacional e a liderança da administração</strong> (Frazer, 2016).</p>
+</blockquote>
+<p>Esses sete itens <strong>são</strong> a resposta da questão 15. Se a professora perguntar "quais são os benefícios?", é essa lista que ela espera ouvir. Tudo o mais no nosso trabalho existe para sustentar e exemplificar isso.</p>
+<p>Uma frase de apoio, caso peçam para explicar melhor: <em>o ambiente de controle é o que faz os outros quatro componentes do COSO funcionarem de verdade; sem ele, controle interno vira papel.</em></p>
+<hr />
+<h2>2. O mapa da matéria (para não se perder)</h2>
+<p>O COSO é uma estrutura conceitual com três camadas. Não confunda as três — é o erro mais comum.</p>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>O que é</th>
+<th>Quantos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objetivos</strong></td>
+<td>O que a organização quer alcançar com o controle interno</td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>Componentes</strong> (ou dimensões)</td>
+<td>Os blocos que sustentam o controle interno</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Princípios</strong></td>
+<td>Regras práticas distribuídas entre os 5 componentes</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+<h3>Os 3 objetivos</h3>
+<ol>
+<li><strong>Operações</strong> — eficácia e eficiência das operações, metas operacionais e de desempenho financeiro, e proteção de ativos contra desperdícios.</li>
+<li><strong>Relatórios</strong> — elaboração de demonstrações confiáveis, internas ou externas, financeiras ou não financeiras.</li>
+<li><strong>Conformidade</strong> — adesão aos aspectos legais e normativos relativos à organização.</li>
+</ol>
+<p>(Janvrin, Payne, Byrnes, Schneider &amp; Curtis, 2012, citados no artigo 4.)</p>
+<h3>Os 5 componentes</h3>
+<ol>
+<li><strong>Ambiente de controle</strong> ← <em>é o nosso tema</em></li>
+<li>Avaliação de riscos</li>
+<li>Atividades de controle</li>
+<li>Informação e comunicação</li>
+<li>Monitoramento</li>
+</ol>
+<h3>Os 17 princípios — os 5 que são do ambiente de controle</h3>
+<ol>
+<li>A organização demonstra compromisso com a integridade e os valores éticos.</li>
+<li>Supervisão para o desenvolvimento e o desempenho do controle interno.</li>
+<li>Estabelecimento de estruturas, relatórios, autoridades e responsabilidades.</li>
+<li>Compromisso de atrair, desenvolver e reter pessoas competentes.</li>
+<li>Responsabilização: a empresa faz com que as pessoas assumam responsabilidade por suas funções de controle interno.</li>
+</ol>
+<p>Os outros 12 se dividem assim: princípios <strong>6 a 9</strong> em avaliação de riscos, <strong>10 a 12</strong> em atividades de controle, <strong>13 a 15</strong> em comunicação e informação, <strong>16 e 17</strong> em monitoramento.</p>
+<p><strong>Datas:</strong> o COSO foi criado em <strong>1992</strong>. Na versão atualizada, passou a envolver os <strong>17 princípios</strong> e a contemplar relatórios de todos os tipos, preservando a definição original de controle interno.</p>
+<hr />
+<h2>3. Os sete benefícios, um por um</h2>
+<p>Para cada um: o que significa, e um exemplo que qualquer um do grupo consegue defender.</p>
+<p><strong>1. Disciplina</strong> — o procedimento vale igual para todo mundo, todo dia.
+<em>Exemplo:</em> só se paga fornecedor com nota fiscal e pedido aprovado; não existe "libera essa aqui que é urgente".
+<em>Ligação com o artigo:</em> ele relata o oposto — <strong>uso de controles informais restrito ao gerente</strong> e "práticas frágeis de controle".</p>
+<p><strong>2. Estrutura</strong> — cada um sabe o que aprova, o que registra e o que guarda.
+<em>Exemplo:</em> segregação de funções. Sancovschi (1999) é citado no artigo com o princípio de que <strong>a autoridade sobre as funções de registro, custódia e autorização deve ser delegada a três pessoas diferentes</strong>.</p>
+<p><strong>3. Integridade</strong> — existe uma linha clara do que é aceitável, e ela é cobrada.
+<em>Exemplo:</em> código de conduta e canal de denúncias que a direção efetivamente usa.</p>
+<p><strong>4. Valores éticos</strong> — o que a organização faz quando ninguém está vendo.
+<em>Exemplo:</em> o gerente recusa vantagem oferecida por fornecedor em processo de compra. Se a chefia aceita, o resto do controle vira encenação.</p>
+<p><strong>5. Competência operacional</strong> — gente preparada para executar o controle que está no papel.
+<em>Exemplo direto do artigo:</em> <strong>profissionais de contabilidade que não possuem conhecimento sobre o controle interno das empresas pelas quais são responsáveis.</strong> É o princípio 4 do COSO (atrair, desenvolver e reter pessoas competentes) sendo violado.</p>
+<p><strong>6. Filosofia de gestão</strong> — controlar para prevenir, não para remediar.
+<em>Exemplo do artigo:</em> Manvailer, Diehl e Leite (2013) constataram que, na proteção de ativos, <strong>os controles só são adotados quando há desempenhos desfavoráveis</strong>. Nuintin, Curi e Gallon (2010) defendem o contrário: os controles internos precisam ter <strong>caráter preventivo</strong>, voltados à correção de desvios.</p>
+<p><strong>7. Estilo operacional e liderança da administração</strong> — o comportamento da alta administração é copiado por todos.
+<em>Exemplo:</em> se o diretor assina sem conferir, a equipe aprende que conferir é perda de tempo. É o "tom no topo".</p>
+<p><strong>Um exemplo positivo para equilibrar</strong> (está na p. 3 do artigo): escritórios de contabilidade <strong>que têm o controle interno estabelecido nas rotinas de suas áreas tendem a gerenciar seus processos com mais eficiência, obtendo maior segurança e confiabilidade nas informações</strong> (Silva, Rocha &amp; Melo, 2011).</p>
+<hr />
+<h2>4. O que o artigo 4 fez e descobriu</h2>
+<p>Saber isso separa quem leu de quem só copiou o resumo.</p>
+<p><strong>Metodologia:</strong> revisão sistemática da literatura (RSL), exploratória e descritiva, em três fases — planejamento, condução e extração/síntese dos dados. A pergunta de pesquisa foi: <em>quais são as evidências existentes a respeito de deficiências e contribuições do controle interno?</em> A busca cobriu <strong>todos os artigos do Congresso Brasileiro de Custos (CBC)</strong>, com as palavras-chave BSC, controle interno, controles internos e risco.</p>
+<p><strong>Amostra:</strong> <strong>27 publicações</strong> recuperadas.</p>
+<p><strong>Resultado 1</strong> — as falhas foram agrupadas em <strong>11 categorias</strong>: aplicação de medidas e ferramentas de custos; comunicação interna e preparo de informações gerenciais; estrutura dos controles internos; gestão de custos e procedimentos de controles internos; gestão de estoques; gestão de riscos; gestão em escritório de contabilidade; prestação de contas; proteção de ativos; sistema de medição de desempenho (BSC); e transações de alto nível.</p>
+<p><strong>Resultado 2</strong> — as deficiências, em sua maioria, <strong>parecem estar associadas à não observância dos princípios do COSO</strong>, e a não consideração desses princípios <strong>pode elevar a existência de erros e fraudes</strong>.</p>
+<p><strong>Resultado 3 — o mais importante para nós:</strong> considerando o COSO, os <strong>ambientes de controle e comunicação parecem ser as dimensões que mais carecem de atenção</strong>, dado o volume de evidências nessas categorias. Ou seja, o artigo prova pelo avesso: o componente mais deficiente na prática é justamente a base.</p>
+<p><strong>Ações de melhoria apontadas</strong> (as que tocam o ambiente de controle):
+- <strong>Treinamento de pessoal com o intuito de disseminar uma cultura de controle, transparência e responsabilidade.</strong>
+- <strong>Sensibilização da equipe</strong> quanto ao controle.
+- <strong>Estabelecimento de responsabilidades</strong> e controles por meio de sistemas informatizados.
+- Melhoria nos sistemas de informação e integração entre os setores.
+- Práticas de controle interno adotadas <strong>independentemente do desempenho</strong> (ou seja, sem esperar o prejuízo).</p>
+<hr />
+<h2>5. Banco de perguntas prováveis</h2>
+<h3>"Qual a diferença entre ambiente de controle e atividades de controle?"</h3>
+<p>Ambiente de controle é o <strong>clima e a base</strong> — ética, estrutura, competência, liderança. Atividades de controle são as <strong>políticas e procedimentos concretos</strong>: aprovações, autorizações, verificações, conciliações, revisões de desempenho, salvaguarda de ativos e segregação de funções. O ambiente diz <em>se as pessoas vão levar a sério</em>; as atividades dizem <em>o que exatamente é feito</em>.</p>
+<h3>"Por que ele é chamado de base?"</h3>
+<p>Porque o nível de controle nas outras dimensões está associado à maneira como as atividades da empresa são estruturadas e como os riscos são avaliados (Moeller, 2007) — e isso é definido pelo ambiente de controle. Na prática: você pode ter um procedimento de conciliação perfeito no papel (atividade de controle), mas se o diretor autoriza exceções e ninguém é responsabilizado (ambiente de controle fraco), o procedimento não é cumprido.</p>
+<h3>"Controle interno elimina o risco de fraude?"</h3>
+<p>Não. O artigo é explícito: os controles internos fornecem uma <strong>garantia razoável, mas não absoluta</strong>, de que os objetivos serão alcançados (Nyakundi, Nyamita &amp; Tinega, 2014).</p>
+<h3>"Isso serve para o setor público?"</h3>
+<p>Serve. O artigo cita Silva, Lima e Almeida (2018): a ausência de controle interno para a comunicação externa <strong>prejudica a prestação de contas do setor público, comprometendo a aprovação das contas e a obtenção de recursos</strong>.</p>
+<h3>"Qual a relação disso com gestão de riscos?"</h3>
+<p>O COSO fornece a base para a gestão de riscos necessária para lidar com as incertezas e otimizar as ações estratégicas para o alcance da missão organizacional (McNally, 2013). A avaliação de riscos é o componente 2, e ela <strong>exige como pré-requisito o estabelecimento de objetivos</strong> — que por sua vez depende da estrutura e da autoridade definidas no ambiente de controle.</p>
+<h3>"E a ISO 31000? É a mesma coisa?"</h3>
+<p>Não. O COSO é uma estrutura de <strong>controle interno</strong> (com um braço de gestão de riscos), nascida nos Estados Unidos em 1992 a partir de preocupações com fraude e confiabilidade de demonstrações contábeis. A ISO 31000 é uma <strong>norma internacional de diretrizes para gestão de riscos</strong>, aplicável a organizações de qualquer natureza — é o tema do artigo 2 do nosso material, que a relaciona com sustentabilidade organizacional e governança. São complementares, não concorrentes.</p>
+<h3>"De onde vem o nome COSO?"</h3>
+<p><em>Committee of Sponsoring Organizations of the Treadway Commission.</em> Publicou a estrutura conceitual de controle interno em 1992.</p>
+<h3>"Por que vocês escolheram esses sete itens e não os três objetivos?"</h3>
+<p>Porque a questão pergunta pelos benefícios <strong>do ambiente de controle</strong>, não do controle interno como um todo. Os sete itens estão na definição literal do ambiente de controle no artigo (Frazer, 2016). Os três objetivos são o destino que esses benefícios ajudam a alcançar.</p>
+<h3>"Dê um exemplo de deficiência de ambiente de controle."</h3>
+<p>Qualquer um destes, todos do artigo: controles informais restritos ao gerente; ausência de gestão de estoques e perdas; falta de incentivo para que os setores colaborem com os controles; profissionais de contabilidade sem conhecimento do controle interno das empresas que atendem; controles desatualizados e limitados; ausência de comprometimento das equipes no BSC.</p>
+<h3>"O que é uma 'grande deficiência' de controle?"</h3>
+<p>Quando o controle está <strong>ausente ou não funciona como deveria</strong>, a empresa estabelece a existência de uma grande deficiência (McNally, 2013). Deficiência de controle, no artigo, é a <strong>perda da capacidade que o controle tem de contribuir para o alcance de um objetivo</strong>.</p>
+<hr />
+<h2>6. Três armadilhas a evitar na hora de falar</h2>
+<ol>
+<li><strong>Não troque os números.</strong> 3 objetivos, 5 componentes, 17 princípios, 5 princípios dentro do ambiente de controle. E, dos dados do artigo: 27 publicações, 11 categorias de deficiência.</li>
+<li><strong>Não diga que o COSO "elimina" riscos ou fraudes.</strong> Garantia razoável, não absoluta.</li>
+<li><strong>Não confunda o ambiente de controle com "clima organizacional" no sentido de RH.</strong> Não é sobre as pessoas estarem felizes; é sobre disciplina, estrutura, ética, competência e responsabilização.</li>
+</ol>
+<hr />
+<h2>7. Glossário rápido</h2>
+<ul>
+<li><strong>Controle interno</strong> — conjunto de medidas e ações que a organização toma para proteger recursos contra perdas, fraudes e ineficiências, promovendo a execução dos objetivos com eficácia e eficiência.</li>
+<li><strong>Ambiente de controle</strong> — o componente-base do COSO; o "tom" da organização.</li>
+<li><strong>Segregação de funções</strong> — separar autorização, registro e custódia entre pessoas diferentes.</li>
+<li><strong>Accountability / responsabilização</strong> — princípio 5: as pessoas assumem responsabilidade por suas funções de controle.</li>
+<li><strong>Tom no topo (tone at the top)</strong> — o exemplo dado pela alta administração, que molda o comportamento de todos.</li>
+<li><strong>RSL (revisão sistemática da literatura)</strong> — método do artigo 4: busca, seleção e síntese estruturada de estudos já publicados.</li>
+<li><strong>CBC</strong> — Congresso Brasileiro de Custos, base de onde vieram as 27 publicações.</li>
+</ul>
+<hr />
+<h2>8. Divisão da fala (referência rápida)</h2>
+<table>
+<thead>
+<tr>
+<th>Quem</th>
+<th>Tempo</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eduardo</td>
+<td>0:00 – 1:20</td>
+<td>Capa, conceito e os 3 objetivos</td>
+</tr>
+<tr>
+<td>Giovana</td>
+<td>1:20 – 2:20</td>
+<td>Mapa mental e os 5 princípios</td>
+</tr>
+<tr>
+<td>Márcio</td>
+<td>2:20 – 3:20</td>
+<td>Disciplina, estrutura, integridade</td>
+</tr>
+<tr>
+<td>Miguel</td>
+<td>3:20 – 4:15</td>
+<td>Valores éticos, competência operacional</td>
+</tr>
+<tr>
+<td>Pâmela</td>
+<td>4:15 – 5:10</td>
+<td>Filosofia de gestão, estilo e liderança</td>
+</tr>
+<tr>
+<td>Renan</td>
+<td>5:10 – 6:20</td>
+<td>Deficiências do artigo e fechamento</td>
+</tr>
+</tbody>
+</table>
+<p>Na dúvida durante a apresentação, qualquer um pode voltar à frase do item 1 deste guia. Ela responde a questão sozinha.</p>
+  </section>
+</main>
+
+<button class="totop" id="totop">Topo</button>
+
+<script>
+(function(){
+  var tabs = {resumo:['t-resumo','d-resumo'], guia:['t-guia','d-guia']};
+  function pick(k){
+    Object.keys(tabs).forEach(function(key){
+      var on = key===k;
+      document.getElementById(tabs[key][0]).setAttribute('aria-selected', on?'true':'false');
+      document.getElementById(tabs[key][1]).classList.toggle('on', on);
+    });
+    window.scrollTo({top:0});
+    if(history.replaceState) history.replaceState(null,'','#'+k);
+  }
+  Object.keys(tabs).forEach(function(k){
+    document.getElementById(tabs[k][0]).addEventListener('click', function(){ pick(k); });
+  });
+  if(location.hash==='#guia') pick('guia');
+
+  var tt = document.getElementById('totop');
+  tt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  window.addEventListener('scroll', function(){
+    tt.classList.toggle('show', window.scrollY > 700);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
