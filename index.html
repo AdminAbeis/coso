@@ -84,12 +84,15 @@ p{max-width:66ch;margin:0 0 14px}
   background:var(--stamp);display:inline-block;padding:5px 10px;border-radius:2px;margin-bottom:18px;
   align-self:flex-start;
 }
-.roster{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.roster{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .roster span{
-  font-family:Archivo;font-weight:600;font-size:13.5px;color:var(--paper-dim);
-  border:1px dashed var(--rule);padding:6px 12px;border-radius:3px;
+  border:1px solid var(--rule);padding:9px 14px;border-radius:3px;
+  display:flex;flex-direction:column;gap:2px;
 }
-.roster span:focus{outline:none;color:var(--paper);border-color:var(--seal);border-style:solid}
+.roster b{font-family:Archivo;font-weight:600;font-size:14.5px;color:var(--paper)}
+.roster i{font-style:normal;font-size:13px;color:var(--slate)}
+.roster i[contenteditable]{border-bottom:1px dashed var(--slate)}
+.roster i:focus{outline:none;color:var(--paper);border-bottom-color:var(--seal)}
 
 /* benefit blocks */
 .ben{border-left:3px solid var(--stamp);padding:2px 0 2px 18px;margin:0 0 26px;max-width:74ch}
@@ -144,7 +147,7 @@ svg.map{width:100%;height:auto;display:block}
   font-family:Archivo;font-weight:600;font-size:11.5px;cursor:pointer;padding:8px 2px 0;
   display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;
 }
-.rail button .who{font-size:15px;font-weight:800;color:inherit}
+.rail button .who{font-size:13.5px;font-weight:800;color:inherit;white-space:nowrap}
 .rail button .lbl{opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .rail button:hover{color:var(--paper-dim)}
 .rail button[aria-current="true"]{color:var(--paper);border-top-color:var(--stamp)}
@@ -202,14 +205,13 @@ kbd{
   <p class="lead dim">Gestão de Risco e Compliance · Administração e Ciências Contábeis, 4º período<br>Profª Edileusa Cristina Borçato · 09/09/2026</p>
   <p class="src">Base: Pereira, A. &amp; Santos, E. F. (2019). As deficiências e as ações de melhoria do controle interno: uma revisão sistemática da literatura. XXVI Congresso Brasileiro de Custos.</p>
   <div class="roster" id="roster">
-    <span contenteditable="true">Integrante 1</span>
-    <span contenteditable="true">Integrante 2</span>
-    <span contenteditable="true">Integrante 3</span>
-    <span contenteditable="true">Integrante 4</span>
-    <span contenteditable="true">Integrante 5</span>
-    <span contenteditable="true">Integrante 6</span>
+    <span><b>Eduardo Henrique Zuffo</b><i>Administração · RA 60009637</i></span>
+    <span><b>Giovana Paulini</b><i>Administração · RA 60007749</i></span>
+    <span><b>Márcio Eller</b><i>Administração · RA 60007883</i></span>
+    <span><b>Miguel de Lima Balani</b><i>Administração · RA 60006229</i></span>
+    <span><b>Pâmela dos Santos</b><i>Ciências Contábeis · RA 09052314</i></span>
+    <span><b>Renan Tuci Afonso</b><i>Ciências Contábeis · RA 60005425</i></span>
   </div>
-  <p class="src" style="margin-top:14px">Clique nos nomes para editar.</p>
 </section>
 
 <!-- 1 -->
@@ -414,41 +416,41 @@ kbd{
 <div class="sheet" id="sheet">
   <div class="closebar"><button class="btn" id="closeSheet">Fechar roteiro</button></div>
   <h2>Roteiro falado — 6 min</h2>
-  <p class="dim">Cada integrante fala uma vez. Os tempos são alvo, não regra: se um passar, o próximo enxuga.</p>
+  <p class="dim">Cada integrante fala uma vez, na ordem abaixo. Os tempos são alvo, não regra: se um passar, o próximo enxuga.</p>
 
   <div class="turn">
-    <div class="head">Integrante 1 <em>0:00 – 1:00 · slides Capa e Conceito</em></div>
+    <div class="head">Eduardo <em>0:00 – 1:00 · slides Capa e Conceito</em></div>
     <p>Boa noite. Nosso grupo respondeu a questão 15: quais são os benefícios de um ambiente de controle segundo o COSO. A resposta está no artigo 4, sobre as deficiências e as ações de melhoria do controle interno.</p>
     <p>Começando pelo conceito: segundo o COSO, de 1992, o ambiente de controle determina o tom da empresa e influencia a consciência de controle de todos os seus membros. Em outras palavras, é o clima interno que faz as pessoas levarem o controle a sério — ou tratarem como formalidade. E ele é chamado de base de todos os controles internos.</p>
   </div>
 
   <div class="turn">
-    <div class="head">Integrante 2 <em>1:00 – 2:05 · slide Mapa mental</em></div>
+    <div class="head">Giovana <em>1:00 – 2:05 · slide Mapa mental</em></div>
     <p>Por que ele é a base? Porque os outros quatro componentes do COSO — avaliação de riscos, atividades de controle, informação e comunicação, e monitoramento — se apoiam nele. Se a base não existe, o resto não se sustenta.</p>
     <p>Este é o nosso mapa mental. O artigo, citando Frazer, lista sete coisas que um bom ambiente de controle fornece à organização: disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e o estilo de operação e a liderança da administração. E no COSO isso se traduz em cinco princípios: integridade e valores éticos, supervisão, estruturas e responsabilidades definidas, pessoas competentes e responsabilização. Vamos passar pelos sete com exemplos.</p>
   </div>
 
   <div class="turn">
-    <div class="head">Integrante 3 <em>2:05 – 3:10 · slide Benefícios 1 a 3</em></div>
+    <div class="head">Márcio <em>2:05 – 3:10 · slide Benefícios 1 a 3</em></div>
     <p><strong>Disciplina:</strong> o procedimento vale igual para todos. Exemplo: só se paga fornecedor com nota fiscal e pedido aprovado, não existe “libera essa que é urgente”. O artigo mostra justamente o contrário em algumas empresas, onde o controle era informal e ficava restrito ao gerente.</p>
     <p><strong>Estrutura:</strong> cada um sabe o que aprova, o que registra e o que guarda. É a segregação de funções — autorizar, registrar e ter a custódia do ativo em três pessoas diferentes.</p>
     <p><strong>Integridade:</strong> código de conduta e canal de denúncias que a própria direção respeita. Isso reduz o espaço para erro e para fraude.</p>
   </div>
 
   <div class="turn">
-    <div class="head">Integrante 4 <em>3:10 – 4:10 · slide Benefícios 4 e 5</em></div>
+    <div class="head">Miguel <em>3:10 – 4:10 · slide Benefícios 4 e 5</em></div>
     <p><strong>Valores éticos:</strong> é o que a empresa faz quando ninguém está olhando. Exemplo: o gerente recusa uma vantagem oferecida por um fornecedor em processo de compra. Se a chefia aceita, todo o resto do controle vira encenação.</p>
     <p><strong>Competência operacional:</strong> ter gente preparada para executar o controle que está no papel. O artigo traz um exemplo forte: profissionais de contabilidade que não tinham conhecimento sobre o controle interno das empresas pelas quais eram responsáveis. O controle existia formalmente e não funcionava. Por isso o COSO tem um princípio só para atrair, desenvolver e reter pessoas competentes.</p>
   </div>
 
   <div class="turn">
-    <div class="head">Integrante 5 <em>4:10 – 5:05 · slide Benefícios 6 e 7</em></div>
+    <div class="head">Pâmela <em>4:10 – 5:05 · slide Benefícios 6 e 7</em></div>
     <p><strong>Filosofia de gestão:</strong> controlar para prevenir, não para remediar. O artigo mostra empresas que só adotavam controles de proteção de ativos depois de um desempenho ruim; e os autores defendem o contrário, que o controle precisa ter caráter preventivo, voltado a corrigir desvios antes que virem perda.</p>
     <p><strong>Estilo de operação e liderança:</strong> o comportamento da alta administração é copiado. Se o diretor assina sem conferir, a equipe aprende que conferir é perda de tempo. Se ele confere, o time confere. É o que se chama de tom no topo.</p>
   </div>
 
   <div class="turn">
-    <div class="head">Integrante 6 <em>5:05 – 6:05 · slides Prova pelo avesso e Resposta</em></div>
+    <div class="head">Renan <em>5:05 – 6:05 · slides Prova pelo avesso e Resposta</em></div>
     <p>Para fechar, o próprio artigo mostra o que acontece quando isso falha. Foram 27 publicações analisadas e 11 grupos de deficiências de controle interno. E o ambiente de controle e a comunicação foram exatamente as dimensões com mais deficiências relatadas. Os autores concluem que essas falhas estão associadas à não observância dos princípios do COSO, o que eleva a existência de erros e fraudes.</p>
     <p>E a ação de melhoria que eles apontam é ambiente de controle de novo: treinar pessoal para disseminar uma cultura de controle, transparência e responsabilidade, e definir responsabilidades.</p>
     <p>Resumindo a resposta da questão 15: o benefício de um ambiente de controle é entregar disciplina, estrutura, integridade, valores éticos, competência operacional, filosofia de gestão e liderança — a base sem a qual nenhum outro controle interno funciona. Obrigado.</p>
@@ -461,21 +463,21 @@ kbd{
   var rail = document.getElementById('rail');
   var stage = document.getElementById('stage');
   var meta = [
-    {who:'1', lbl:'Capa'},
-    {who:'1', lbl:'Conceito'},
-    {who:'2', lbl:'Mapa mental'},
-    {who:'3', lbl:'Benef. 1–3'},
-    {who:'4', lbl:'Benef. 4–5'},
-    {who:'5', lbl:'Benef. 6–7'},
-    {who:'6', lbl:'Sem ambiente'},
-    {who:'6', lbl:'Resposta'}
+    {who:'Eduardo', lbl:'Capa'},
+    {who:'Eduardo', lbl:'Conceito'},
+    {who:'Giovana', lbl:'Mapa mental'},
+    {who:'Márcio',  lbl:'Benef. 1–3'},
+    {who:'Miguel',  lbl:'Benef. 4–5'},
+    {who:'Pâmela',  lbl:'Benef. 6–7'},
+    {who:'Renan',   lbl:'Sem ambiente'},
+    {who:'Renan',   lbl:'Resposta'}
   ];
   var i = 0;
 
   meta.forEach(function(m, idx){
     var b = document.createElement('button');
     b.innerHTML = '<span class="who">'+m.who+'</span><span class="lbl">'+m.lbl+'</span>';
-    b.title = 'Integrante '+m.who+' — '+m.lbl;
+    b.title = m.who+' — '+m.lbl;
     b.addEventListener('click', function(){ go(idx); });
     rail.appendChild(b);
   });
