@@ -121,8 +121,20 @@ p{max-width:66ch;margin:0 0 14px}
 .answer p{font-size:clamp(17px,2vw,21px);margin:0}
 
 /* ---------- mind map ---------- */
-.map-wrap{margin:0 -2vw}
+.map-wrap{margin:0 -2vw;position:relative}
 svg.map{width:100%;height:auto;display:block}
+.maphint{display:none;font-size:13.5px;color:var(--slate);margin:8px 0 0;text-align:center}
+.zoomclose{display:none}
+.map-wrap.zoom{
+  position:fixed;inset:0;z-index:70;margin:0;padding:56px 10px 10px;
+  background:var(--ink);overflow:auto;-webkit-overflow-scrolling:touch;
+}
+.map-wrap.zoom svg.map{width:1150px;max-width:none}
+.map-wrap.zoom .maphint{display:none}
+.map-wrap.zoom .zoomclose{
+  display:block;position:fixed;top:12px;right:12px;z-index:71;
+  background:var(--ink-2);
+}
 .mapmob{display:none}
 .mapmob ul{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--stamp)}
 .mapmob li{position:relative;padding:0 0 20px 14px}
@@ -178,11 +190,24 @@ kbd{
 @media (max-width:820px){
   body{font-size:16px}
   .slide{padding:26px 22px 34px}
-  svg.map{display:none}
-  .mapmob{display:block}
-  .rail button .lbl{display:none}
+  svg.map{cursor:zoom-in}
+  .maphint{display:block}
+  .mapmob{display:block;margin-top:20px;padding-top:20px;border-top:1px solid var(--rule)}
   .hint{display:none}
   .bar .tag{font-size:11.5px}
+  .rail{
+    overflow-x:auto;overflow-y:hidden;padding:0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+  .rail::-webkit-scrollbar{display:none}
+  .rail button{
+    flex:0 0 auto;min-width:98px;padding:9px 14px 0;gap:2px;
+    border-right:1px solid var(--rule);scroll-snap-align:center;
+  }
+  .rail button:last-child{border-right:none}
+  .rail button .who{font-size:13px}
+  .rail button .lbl{font-size:10.5px;max-width:88px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -227,7 +252,8 @@ kbd{
 <section class="slide">
   <div class="eyebrow">Mapa mental</div>
   <h2>Sete coisas que um bom ambiente de controle entrega</h2>
-  <div class="map-wrap">
+  <div class="map-wrap" id="mapWrap">
+  <button class="btn zoomclose" id="zoomClose">Fechar mapa</button>
   <svg class="map" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa mental dos benefícios do ambiente de controle segundo o COSO">
     <defs>
       <style>
@@ -293,6 +319,7 @@ kbd{
     <text class="ee" x="900" y="615">O chefe confere antes de assinar —</text>
     <text class="ee" x="900" y="634">e o time passa a conferir também.</text>
   </svg>
+  <p class="maphint">Toque no mapa para ampliar.</p>
   </div>
 
   <div class="mapmob">
@@ -488,6 +515,10 @@ kbd{
     slides.forEach(function(s,k){ s.classList.toggle('on', k===i); });
     tabs.forEach(function(t,k){ t.setAttribute('aria-current', k===i ? 'true':'false'); });
     stage.scrollTop = 0;
+    if(rail.scrollWidth > rail.clientWidth + 4 && tabs[i].scrollIntoView){
+      try{ tabs[i].scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'}); }
+      catch(err){ rail.scrollLeft = tabs[i].offsetLeft - (rail.clientWidth - tabs[i].offsetWidth)/2; }
+    }
   }
 
   // clock
@@ -522,10 +553,25 @@ kbd{
   document.getElementById('scriptBtn').addEventListener('click', function(){ toggleSheet(); });
   document.getElementById('closeSheet').addEventListener('click', function(){ toggleSheet(false); });
 
+  // zoom do mapa no celular
+  var mapWrap = document.getElementById('mapWrap');
+  var mapSvg = mapWrap.querySelector('svg.map');
+  function zoomed(){ return mapWrap.classList.contains('zoom'); }
+  function setZoom(on){
+    mapWrap.classList.toggle('zoom', on);
+    if(on){ mapWrap.scrollLeft = (mapWrap.scrollWidth - mapWrap.clientWidth)/2; }
+  }
+  mapSvg.addEventListener('click', function(){
+    if(window.matchMedia('(max-width:820px)').matches && !zoomed()) setZoom(true);
+  });
+  document.getElementById('zoomClose').addEventListener('click', function(e){
+    e.stopPropagation(); setZoom(false);
+  });
+
   document.addEventListener('keydown', function(e){
     if(e.target.isContentEditable) return;
-    if(e.key==='Escape'){ toggleSheet(false); return; }
-    if(sheet.classList.contains('on')) return;
+    if(e.key==='Escape'){ toggleSheet(false); setZoom(false); return; }
+    if(sheet.classList.contains('on') || zoomed()) return;
     if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); go(i+1); }
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(i-1); }
     else if(e.key==='Home'){ go(0); }
@@ -536,9 +582,9 @@ kbd{
 
   // swipe on touch
   var x0=null;
-  stage.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener('touchstart', function(e){ x0 = zoomed() ? null : e.touches[0].clientX; }, {passive:true});
   stage.addEventListener('touchend', function(e){
-    if(x0===null) return;
+    if(x0===null || zoomed()) return;
     var dx = e.changedTouches[0].clientX - x0;
     if(Math.abs(dx) > 60){ go(dx < 0 ? i+1 : i-1); }
     x0 = null;
