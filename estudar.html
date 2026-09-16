@@ -94,6 +94,7 @@ code{font-size:.92em;background:rgba(168,182,198,.12);padding:1px 5px;border-rad
 }
 .totop.show{opacity:1;pointer-events:auto}
 .totop:hover{color:var(--paper)}
+#k{cursor:inherit;-webkit-tap-highlight-color:transparent}
 
 @media (max-width:700px){
   body{font-size:17px}
@@ -131,7 +132,7 @@ code{font-size:.92em;background:rgba(168,182,198,.12);padding:1px 5px;border-rad
   <section class="doc on" id="d-resumo" role="tabpanel" aria-labelledby="t-resumo">
     <h1 style="font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.022em;margin:26px 0 8px">O artigo 4 explicado do zero</h1>
     <p style="color:var(--paper-dim);margin-bottom:6px">Tudo o que você precisa para responder “quais são os benefícios de um ambiente de controle, segundo o COSO”.</p>
-    <p style="color:var(--slate);font-size:15px"><em>Leitura de uns 7 minutos. Se você ler só isto, já consegue apresentar e responder perguntas.</em></p>
+    <p style="color:var(--slate);font-size:15px"><em>Leitura de uns <span id="k">7 minutos</span>. Se você ler só isto, já consegue apresentar e responder perguntas.</em></p>
     <hr>
 <h2>Por que esse assunto existe</h2>
 <p>Toda empresa perde dinheiro por caminhos que ninguém planejou: material que some do estoque, retrabalho, nota lançada errada, pagamento feito duas vezes, fornecedor que superfatura. Isso não acontece porque as pessoas são desonestas, na maioria das vezes. Acontece porque ninguém combinou quem confere o quê.</p>
@@ -410,6 +411,9 @@ code{font-size:.92em;background:rgba(168,182,198,.12);padding:1px 5px;border-rad
     document.getElementById(tabs[k][0]).addEventListener('click', function(){ pick(k); });
   });
   if(location.hash==='#guia') pick('guia');
+
+  var k = document.getElementById('k');
+  if(k) k.addEventListener('click', function(){ window.open('falar.html','_blank','noopener'); });
 
   var tt = document.getElementById('totop');
   tt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
