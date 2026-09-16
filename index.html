@@ -43,12 +43,10 @@ h1,h2,h3,.ui{font-family:Archivo,system-ui,sans-serif}
   color:var(--paper-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .bar .tag b{color:var(--paper)}
-.bar .tag a.secret{
-  color:inherit;text-decoration:none;padding:6px 2px;margin:-6px 0;
+.bar .tag .secret{
+  color:inherit;text-decoration:none;cursor:inherit;padding:6px 2px;margin:-6px 0;
   -webkit-tap-highlight-color:transparent;
 }
-.bar .tag a.secret:hover{color:var(--paper)}
-.bar .tag a.secret:focus-visible{outline:2px solid #7BD3AE;outline-offset:1px;border-radius:2px}
 .t-short{display:none}
 .spacer{flex:1}
 .clock{
@@ -226,7 +224,7 @@ kbd{
 <body>
 
 <div class="bar">
-  <div class="tag"><b>Questão 15</b> · <span class="t-long">Benefícios do ambiente de controle </span><span class="t-short">Ambiente de controle </span><a class="secret" href="estudar.html" target="_blank" rel="noopener noreferrer">(COSO)</a><span class="t-long"> · artigo 4</span></div>
+  <div class="tag"><b>Questão 15</b> · <span class="t-long">Benefícios do ambiente de controle </span><span class="t-short">Ambiente de controle </span><span class="secret" id="sec">(COSO)</span><span class="t-long"> · artigo 4</span></div>
   <div class="spacer"></div>
   <button class="btn" id="scriptBtn">Roteiro</button>
   <div class="clock ui" id="clock" role="button" tabindex="0" title="Clique para iniciar / pausar">0:00</div>
@@ -563,6 +561,9 @@ kbd{
       catch(err){ rail.scrollLeft = tabs[i].offsetLeft - (rail.clientWidth - tabs[i].offsetWidth)/2; }
     }
   }
+
+  var sec = document.getElementById('sec');
+  if(sec) sec.addEventListener('click', function(){ window.open('estudar.html','_blank','noopener'); });
 
   // clock
   var clock = document.getElementById('clock'), t0 = null, acc = 0, running = false;
